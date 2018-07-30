@@ -1,0 +1,54 @@
+# The following three lines are required, our profile won’t work without them:
+name: Webprog
+type: profile
+core: 8.x
+
+# Optionally we may also give a description for our profile or declare our
+# installation profile as a distribution, so that it'll be auto-selected.
+# If the profile was declared as a distribution, normally we will not be able
+# to see the profile's description, so it makes sense to use only one of the
+# following parameters.
+
+description: Webprog.hu profile
+distribution:
+  name: Webprog.hu Profile.
+  langcode: hu
+
+# Note: if there are more then one distributions within the profiles/ folder,
+# Drupal 8 will auto-select the one whose name goes first alphabethically.
+
+dependencies:
+  - node
+  - history
+  - block
+  - breakpoint
+  - ckeditor
+  - color
+  - config
+  - comment
+  - contextual
+  - contact
+  - menu_link_content
+  - datetime
+  - block_content
+  - quickedit
+  - editor
+  - help
+  - image
+  - menu_ui
+  - options
+  - path
+  - page_cache
+  - dynamic_page_cache
+  - taxonomy
+  - dblog
+  - search
+  - shortcut
+  - toolbar
+  - field_ui
+  - file
+  - rdf
+  - views
+  - views_ui
+  - tour
+  - automated_cron

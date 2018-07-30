@@ -790,10 +790,8 @@ $databases['default']['default'] = array (
   'username' => 'root',
   'password' => 'admin',
   'prefix' => '',
-  'host' => '10.0.75.1',
+  'host' => 'db',
   'port' => '3306',
   'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
   'driver' => 'mysql',
 );
-$settings['install_profile'] = 'standard';
-$config_directories['sync'] = 'sites/default/files/config_Fx_78LzaJDjd1M0l0ykAQLiLMsjzEeCDNl00j_iZooNg3OrvbD2ZZpZ0e4i7Ob6xRJkcdu7nPQ/sync';

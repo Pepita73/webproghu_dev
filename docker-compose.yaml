@@ -29,8 +29,8 @@ services:
       # volume (which is what we're creating here) will be initialized with the
       # existing content of the image at the same location
       - ./sites:/var/www/html/sites
-#    links:
-#      - db
+    links:
+      - db
 #      - db:database
 #    restart: always
 #    command:
