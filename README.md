@@ -15,3 +15,19 @@
 - Rebuild: docker-compose up --build
 - Benézni konténerbe (Powershell): docker exec -it drupal-apache /bin/bash
 - Ha netán valami fájl / könyvtár jogosultság gond lenne, az innen kezelhető
+
+# Container indítás
+
+Detached mód, hogy visszakapjuk a promptot:
+
+``` sh
+docker-compose up -d
+```
+
+# Drupal telepítés
+
+Első `clone` (vagy később `composer.json` módosítás, esetleg `git clean` és hasonlók után) így lehet a szükséges fájlokat telepíteni:
+
+``` sh
+docker exec -it drupal-apache sh -c "composer install"
+```

@@ -53,16 +53,26 @@ RUN { \
 
 WORKDIR /var/www/html
 
-RUN mkdir -p /var/www/html/sites /var/www/html/modules /var/www/html/themes /var/www/html/profiles
+## Install additional packages for composer and drush
+RUN apt-get update && apt-get install -y --no-install-recommends \
+		git \
+		mysql-client \
+	&& \
+	rm -rf /var/lib/apt/lists/*
 
-# https://www.drupal.org/node/3060/release
-ENV DRUPAL_VERSION 8.5.5
-ENV DRUPAL_MD5 4fee1348bbac85cae82d6634e7296b9f
+# Install composer v1.6.5
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
+	php -r "if (hash_file('SHA384', 'composer-setup.php') === '544e09ee996cdf60ece3804abc52599c22b1f40f4323403c44d44fdfdd586475ca9813a858088ffbc1f233e9b180f061') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
+	php composer-setup.php && \
+	php -r "unlink('composer-setup.php');" && \
+	mv composer.phar /usr/local/bin/composer
 
-RUN curl -fSL "https://ftp.drupal.org/files/projects/drupal-${DRUPAL_VERSION}.tar.gz" -o drupal.tar.gz \
-	&& echo "${DRUPAL_MD5} *drupal.tar.gz" | md5sum -c - \
-	&& tar -xz --strip-components=1 -f drupal.tar.gz \
-	&& rm drupal.tar.gz \
-	&& chown -R www-data:www-data sites modules themes profiles \
-	&& chmod -R 0755 sites modules themes profiles
+# Install Drush Launcher
+RUN curl -L "https://github.com/drush-ops/drush-launcher/releases/download/0.6.0/drush.phar" -o "drush.phar" && \
+	chmod +x "drush.phar" && \
+	mv "drush.phar" /usr/local/bin/drush
 
+# Change Document Root
+ENV APACHE_DOCUMENT_ROOT /var/www/html/web
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
