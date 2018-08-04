@@ -5,7 +5,7 @@
 #
 # During initial Drupal setup,
 # Database type: MariaDB
-# Database name: ??
+# Database name: webproghu
 # Database username: root
 # Database password: admin
 # ADVANCED OPTIONS; Database host: localhost:3306
@@ -26,22 +26,17 @@ services:
       # this takes advantage of the feature in Docker that a new anonymous
       # volume (which is what we're creating here) will be initialized with the
       # existing content of the image at the same location
-#    links:
-#      - db
-#      - db:database
+    links:
+      - db
+      - db:localhost
 #    restart: always
 #    command:
 #      - chown -R www-data:www-data /var/www/html/sites /var/www/html/modules /var/www/html/themes /var/www/html/profiles
 
-#  postgres:
-#    image: postgres:10
-#    environment:
-#      POSTGRES_PASSWORD: example
-#    restart: always
-
   db:
     image: mariadb:10.3
     container_name: drupal-mariadb
+    hostname: localhost
     ports:
       - 3306:3306
     environment:
