@@ -52,8 +52,6 @@
         ],
         "post-install-cmd": [
             "DrupalProject\\composer\\ScriptHandler::createRequiredFiles",
-            "cp -f config/settings.php web/sites/default/settings.php",
-            "chmod 0666 web/sites/default/settings.php",
             "cp config/.env.dev .env"
         ],
         "post-update-cmd": [
