@@ -13,7 +13,9 @@ gfsetup_prefix_versiontag=""
 
 
 
-# Init git flow with the defaults
+# Init repo and git flow with the defaults
+git fetch
+git checkout --track origin/develop
 git flow init -fd
 
 
