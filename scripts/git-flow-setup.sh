@@ -21,8 +21,8 @@ git flow init -fd
 # Override the things we need
 
 # Basic branches
-git config gitflow.branch.master master
-git config gitflow.branch.develop develop
+git config gitflow.branch.master "${gfsetup_branch_master}"
+git config gitflow.branch.develop "${gfsetup_branch_develop}"
 
 # Branch prefixes
 git config gitflow.prefix.feature "${gfsetup_prefix_feature}"
